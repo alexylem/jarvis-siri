@@ -19,8 +19,8 @@ def main(username, password, interval):
     result, tidnote = mail.select ("Notes")
     last_checked=int(tidnote[0])
     logger.debug ('It is %d', last_checked)
+    logger.debug ('Checking new Notes...')
     while True:
-        logger.debug ('Checking new Notes...')
         result, tidnote = mail.select ("Notes")
         idnote=int(tidnote[0])
         if idnote > last_checked:
@@ -33,8 +33,8 @@ def main(username, password, interval):
             logger.debug ('Order: %s', order)
             output = check_output([os.path.join (".", "jarvis.sh"), "-x", order])
             logger.debug ('Output: %s', output)
-        else:
-            logger.debug ('No new Note (last note id still %d)', idnote)
+        #else:
+            #logger.debug ('No new Note (last note id still %d)', idnote)
         time.sleep (interval)
     
 if __name__ == '__main__':
